@@ -10,8 +10,11 @@ public class GTKSolverTrainer : Gtk.Application {
         var win = new TrainerWindow(this);
         win.present();
     }
+}
 
-    public static int main(string[] args) {
-        return new GTKSolverTrainer().run(args);
-    }
+// Export function for C to call
+[CCode (cname = "gtk_solver_trainer_main")]
+public void gtk_solver_trainer_main(string[] args) {
+    var app = new GTKSolverTrainer();
+    app.run(args);
 }
