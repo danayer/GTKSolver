@@ -7,10 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Находим и подключаем LibTorch
 find_package(Torch REQUIRED)
 
-# Добавляем поддержку Vala и GTK4
+# Добавляем поддержку GTK4 через pkg-config
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(VALA REQUIRED IMPORTED_TARGET vala)
 pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtk4)
+
+# Используем наш собственный FindVala.cmake вместо pkg-config
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+find_package(Vala REQUIRED)
 
 # Основные исходники ядра на C++
 set(CORE_SOURCES
@@ -40,7 +43,7 @@ target_link_libraries(train formula_core ${TORCH_LIBRARIES})
 # Настраиваем компиляцию Vala кода для основного GUI
 include(${CMAKE_SOURCE_DIR}/cmake/ValaPrecompile.cmake)
 
-vala_precompile(GUI_VALA_C
+vala_precompile(GUI_VALA_C gui_vala_target
     src/gui/main.vala
     src/gui/window.vala
     src/gui/model_manager.vala
@@ -52,7 +55,7 @@ OPTIONS
 )
 
 # Настраиваем компиляцию Vala кода для GUI обучения
-vala_precompile(TRAINER_VALA_C
+vala_precompile(TRAINER_VALA_C trainer_vala_target
     src/trainer/main_trainer.vala
     src/trainer/trainer_window.vala
     src/trainer/training_manager.vala
