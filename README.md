@@ -1,7 +1,8 @@
 # 🧠 GTKSolver - Нейросеть для решения математических задач
 
 <div align="center">
-  <img src="docs/images/logo.png" alt="GTKSolver Logo" width="180">
+  <img src="gtksolver.svg" alt="GTKSolver Logo" width="180">
+  <img src="gtksolver-trainer.svg" alt="GTKSolver Logo" width="180">
   <br>
   <em>Интеллектуальная система для решения задач с формулами на основе нейросетей</em>
   <br><br>
