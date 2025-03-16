@@ -68,8 +68,9 @@ std::vector<torch::Tensor> FormulaTrainer::create_batches(
                 max_length = std::max(max_length, group[j].size());
             }
             
-            // Создаем тензор для батча
-            torch::Tensor batch = torch::zeros({actual_batch_size, max_length}, torch::kLong);
+            // Fix narrowing conversion by explicitly casting to int64_t
+            torch::Tensor batch = torch::zeros({static_cast<int64_t>(actual_batch_size), 
+                                               static_cast<int64_t>(max_length)}, torch::kLong);
             
             // Заполняем тензор токенами, заполняя PAD токенами короткие последовательности
             for (size_t j = 0; j < actual_batch_size; ++j) {

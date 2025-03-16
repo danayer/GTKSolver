@@ -10,8 +10,8 @@ FormulaEncoder::FormulaEncoder(int vocab_size, int embedding_dim, int hidden_dim
 
 torch::Tensor FormulaEncoder::forward(torch::Tensor x) {
     auto embedded = embedding(x);
-    torch::Tensor output, hidden;
-    std::tie(output, hidden) = lstm(embedded);
+    auto lstm_output = lstm(embedded);
+    auto output = std::get<0>(lstm_output);
     return fc(output);
 }
 
@@ -26,7 +26,7 @@ torch::Tensor FormulaDecoder::forward(torch::Tensor x, torch::Tensor encoder_out
     // Реализация механизма внимания
     auto embedded = embedding(x);
     
-    auto batch_size = embedded.size(0);
+    // Removed unused variable batch_size
     auto seq_len = embedded.size(1);
     auto enc_seq_len = encoder_output.size(1);
     
@@ -44,16 +44,16 @@ torch::Tensor FormulaDecoder::forward(torch::Tensor x, torch::Tensor encoder_out
     // Комбинируем с встроенными векторами
     auto rnn_input = torch::cat({embedded, context}, 2);
     
-    torch::Tensor output, hidden;
-    std::tie(output, hidden) = lstm(rnn_input);
+    auto lstm_output = lstm(rnn_input);
+    auto output = std::get<0>(lstm_output);
     
     return fc(output);
 }
 
 FormulaModel::FormulaModel(int vocab_size, int embedding_dim, int hidden_dim) : 
-    vocab_size(vocab_size), hidden_dim(hidden_dim) {
-    encoder = register_module("encoder", FormulaEncoder(vocab_size, embedding_dim, hidden_dim));
-    decoder = register_module("decoder", FormulaDecoder(vocab_size, embedding_dim, hidden_dim));
+    hidden_dim(hidden_dim), vocab_size(vocab_size) {
+    encoder = register_module("encoder", std::make_shared<FormulaEncoder>(vocab_size, embedding_dim, hidden_dim));
+    decoder = register_module("decoder", std::make_shared<FormulaDecoder>(vocab_size, embedding_dim, hidden_dim));
 }
 
 torch::Tensor FormulaModel::forward(torch::Tensor input_seq) {
@@ -83,7 +83,7 @@ std::vector<int> FormulaModel::generate(std::vector<int>& input_tokens, int max_
         auto output = decoder->forward(decoder_input, encoder_output);
         
         // Получаем токен с наивысшей вероятностью
-        auto top_token = output.argmax(2).item<int>();
+        auto top_token = output.argmax(2).item().toInt();
         output_tokens.push_back(top_token);
         
         // Проверка на токен конца последовательности
@@ -103,14 +103,10 @@ void FormulaModel::save(const std::string& path) {
 }
 
 FormulaModel FormulaModel::load(const std::string& path, torch::Device device) {
-    torch::jit::script::Module module;
     try {
-        // Загрузка модуля
-        module = torch::jit::load(path, device);
-        
-        // Преобразование к FormulaModel
+        // Загрузка модели
         std::shared_ptr<FormulaModel> model;
-        torch::load(model, path);
+        torch::load(model, path, device);
         
         return *model;
     }
