@@ -102,13 +102,13 @@ void FormulaModel::save(const std::string& path) {
     torch::save(shared_from_this(), path);
 }
 
-FormulaModel FormulaModel::load(const std::string& path, torch::Device device) {
+std::shared_ptr<FormulaModel> FormulaModel::load(const std::string& path, torch::Device device) {
     try {
         // Загрузка модели
         std::shared_ptr<FormulaModel> model;
         torch::load(model, path, device);
         
-        return *model;
+        return model;
     }
     catch (const c10::Error& e) {
         std::cerr << "Error loading the model: " << e.what() << std::endl;

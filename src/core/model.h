@@ -43,8 +43,8 @@ public:
     // Сохранение модели
     void save(const std::string& path);
     
-    // Загрузка модели
-    static FormulaModel load(const std::string& path, torch::Device device = torch::kCPU);
+    // Загрузка модели - изменен возвращаемый тип
+    static std::shared_ptr<FormulaModel> load(const std::string& path, torch::Device device = torch::kCPU);
     
     // Прямой проход через всю модель
     torch::Tensor forward(torch::Tensor input_seq);

@@ -13,7 +13,7 @@ FormulaInference::FormulaInference() : model_loaded(false), vocabulary_loaded(fa
 
 bool FormulaInference::load_model(const std::string& model_path) {
     try {
-        model = std::make_shared<FormulaModel>(FormulaModel::load(model_path));
+        model = FormulaModel::load(model_path);
         model_loaded = true;
         return true;
     } catch (const std::exception& e) {
