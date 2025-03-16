@@ -108,12 +108,16 @@ GTKSolver/
 │   │   ├── trainer.h
 │   │   ├── trainer.cpp
 │   │   ├── tokenizer.h
-│   │   └── tokenizer.cpp
+│   │   ├── tokenizer.cpp
+│   │   ├── inference.h
+│   │   └── inference.cpp
 │   └── gui/                 # Графический интерфейс на Vala/GTK4
 │       ├── main.vala
 │       ├── window.vala
 │       ├── model_manager.vala
-│       └── task_processor.vala
+│       ├── task_processor.vala
+│       └── window.ui
+│
 └── README.md                # Этот файл
 ```
 
