@@ -9,7 +9,7 @@
   <a href="#-использование"><strong>Использование</strong></a> •
   <a href="#-обучение-модели"><strong>Обучение</strong></a> •
   <a href="#-архитектура"><strong>Архитектура</strong></a> •
-  <a href="#-сборка-appimage"><strong>AppImage</strong></a>
+  <a href="#-сборка-и-использование-appimage"><strong>AppImage</strong></a>
 </div>
 
 ## 📚 Описание проекта
@@ -41,7 +41,7 @@
 ### 📀 Установка в различных дистрибутивах Linux
 
 <details>
-<summary><b>🐧 Ubuntu/Debian</b></summary>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg" height="20"> <b>Ubuntu/Debian</b></summary>
 
 ```bash
 # Установка базовых инструментов
@@ -51,6 +51,9 @@ sudo apt-get install build-essential cmake git pkg-config
 # Установка GTK4
 sudo apt-get install libgtk-4-dev
 
+# Установка Vala
+sudo apt-get install valac
+
 # Создание директории для LibTorch
 mkdir -p $HOME/libtorch
 cd $HOME/libtorch
@@ -58,11 +61,16 @@ cd $HOME/libtorch
 # Загрузка и распаковка LibTorch
 wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.0%2Bcpu.zip
 unzip libtorch-cxx11-abi-shared-with-deps-1.9.0+cpu.zip
+
+# Добавление переменной окружения
+echo 'export LD_LIBRARY_PATH=$HOME/libtorch/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
 ```
+
 </details>
 
 <details>
-<summary><b>🐧 Alt Linux</b></summary>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Altlinux.svg" height="20"> <b>Alt Linux</b></summary>
 
 ```bash
 # Установка базовых инструментов
@@ -72,6 +80,9 @@ sudo apt-get install make-gcc cmake git pkg-config
 # Установка GTK4
 sudo apt-get install libgtk4-devel
 
+# Установка Vala
+sudo apt-get install vala-compiler
+
 # Создание директории для LibTorch
 mkdir -p $HOME/libtorch
 cd $HOME/libtorch
@@ -79,11 +90,16 @@ cd $HOME/libtorch
 # Загрузка и распаковка LibTorch
 wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.0%2Bcpu.zip
 unzip libtorch-cxx11-abi-shared-with-deps-1.9.0+cpu.zip
+
+# Добавление переменной окружения
+echo 'export LD_LIBRARY_PATH=$HOME/libtorch/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
 ```
+
 </details>
 
 <details>
-<summary><b>🔒 Astra Linux</b></summary>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Astra_Linux_logo.svg" height="20"> <b>Astra Linux</b></summary>
 
 ```bash
 # Установка базовых инструментов
@@ -93,6 +109,9 @@ sudo apt install build-essential cmake git pkg-config
 # Установка GTK4
 sudo apt install libgtk-4-dev
 
+# Установка Vala
+sudo apt install valac
+
 # Создание директории для LibTorch
 mkdir -p $HOME/libtorch
 cd $HOME/libtorch
@@ -100,7 +119,100 @@ cd $HOME/libtorch
 # Загрузка и распаковка LibTorch
 wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.0%2Bcpu.zip
 unzip libtorch-cxx11-abi-shared-with-deps-1.9.0+cpu.zip
+
+# Добавление переменной окружения
+echo 'export LD_LIBRARY_PATH=$HOME/libtorch/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
 ```
+
+</details>
+
+<details>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Archlinux-icon-crystal-64.svg" height="20"> <b>Arch Linux</b></summary>
+
+```bash
+# Установка базовых инструментов
+sudo pacman -Syu
+sudo pacman -S base-devel cmake git pkg-config
+
+# Установка GTK4
+sudo pacman -S gtk4
+
+# Установка Vala
+sudo pacman -S vala
+
+# Создание директории для LibTorch
+mkdir -p $HOME/libtorch
+cd $HOME/libtorch
+
+# Загрузка и распаковка LibTorch
+wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.0%2Bcpu.zip
+unzip libtorch-cxx11-abi-shared-with-deps-1.9.0+cpu.zip
+
+# Добавление переменной окружения
+echo 'export LD_LIBRARY_PATH=$HOME/libtorch/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+</details>
+
+<details>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/The_GIMP_icon_-_gnome.svg" height="20"> <b>Fedora/Red Hat/CentOS</b></summary>
+
+```bash
+# Установка базовых инструментов
+sudo dnf update
+sudo dnf install gcc gcc-c++ make cmake git pkg-config
+
+# Установка GTK4
+sudo dnf install gtk4-devel
+
+# Установка Vala
+sudo dnf install vala
+
+# Создание директории для LibTorch
+mkdir -p $HOME/libtorch
+cd $HOME/libtorch
+
+# Загрузка и распаковка LibTorch
+wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.0%2Bcpu.zip
+unzip libtorch-cxx11-abi-shared-with-deps-1.9.0+cpu.zip
+
+# Добавление переменной окружения
+echo 'export LD_LIBRARY_PATH=$HOME/libtorch/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+</details>
+
+<details>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/OpenSUSE_Logo.svg" height="20"> <b>openSUSE</b></summary>
+
+```bash
+# Установка базовых инструментов
+sudo zypper refresh
+sudo zypper install -t pattern devel_basis
+sudo zypper install cmake git pkg-config
+
+# Установка GTK4
+sudo zypper install gtk4-devel
+
+# Установка Vala
+sudo zypper install vala
+
+# Создание директории для LibTorch
+mkdir -p $HOME/libtorch
+cd $HOME/libtorch
+
+# Загрузка и распаковка LibTorch
+wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.0%2Bcpu.zip
+unzip libtorch-cxx11-abi-shared-with-deps-1.9.0+cpu.zip
+
+# Добавление переменной окружения
+echo 'export LD_LIBRARY_PATH=$HOME/libtorch/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
 </details>
 
 ### 🔨 Сборка из исходников
@@ -286,6 +398,116 @@ cmake --build . --config Release
 3. ✅ Получить решение задачи с пояснениями
 4. 💾 Сохранить результаты
 
+## 🛠️ Сборка и использование AppImage
+
+[<img src="https://appimage.github.io/img/logo3.svg" height="30">](https://appimage.github.io/)
+
+### Что такое AppImage?
+
+AppImage — это формат распространения приложений для Linux, который позволяет запускать программы без установки. Это означает:
+- 🚀 Никаких зависимостей для установки
+- 🔌 Запуск на любом дистрибутиве
+- 📦 Всё нужное находится внутри одного файла
+- 🗑️ Удаление — просто удалите файл AppImage
+
+### Использование GTKSolver в формате AppImage
+
+1. **Загрузите AppImage файл**
+
+   Скачайте файл AppImage с [GitHub Releases](https://github.com/danayer/GTKSolver/releases):
+   ```bash
+   wget https://github.com/danayer/GTKSolver/releases/latest/download/GTKSolver-x86_64.AppImage
+   ```
+
+2. **Сделайте файл исполняемым**
+
+   ```bash
+   chmod +x GTKSolver-x86_64.AppImage
+   ```
+
+3. **Запустите приложение**
+
+   ```bash
+   ./GTKSolver-x86_64.AppImage
+   ```
+
+   Для удобства можете создать ярлык на рабочем столе или добавить в меню приложений:
+   ```bash
+   ./GTKSolver-x86_64.AppImage --install
+   ```
+
+### Создание собственного AppImage
+
+Если вы хотите собрать GTKSolver в формате AppImage из исходного кода:
+
+1. **Установите необходимые инструменты**
+
+   ```bash
+   sudo apt-get install patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot strace
+   wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+   wget https://github.com/linuxdeploy/linuxdeploy-plugin-gtk/releases/download/continuous/linuxdeploy-plugin-gtk-x86_64.AppImage
+   chmod +x linuxdeploy*.AppImage
+   ```
+
+2. **Соберите проект с правильным путём установки**
+
+   ```bash
+   mkdir build && cd build
+   cmake -DCMAKE_PREFIX_PATH=$HOME/libtorch -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ..
+   make -j$(nproc)
+   make install DESTDIR=AppDir
+   ```
+
+3. **Создайте AppImage**
+
+   ```bash
+   ./linuxdeploy-x86_64.AppImage --appdir AppDir \
+       --plugin gtk \
+       --output appimage \
+       --desktop-file=../desktop/gtksolver-gui.desktop \
+       --icon-file=../icons/gtksolver.svg
+   ```
+
+4. **Интеграция с системой**
+
+   После создания AppImage его можно интегрировать в систему запуском:
+   ```bash
+   ./GTKSolver-x86_64.AppImage --install
+   ```
+
+5. **Особенности для LibTorch**
+
+   При использовании LibTorch внутри AppImage необходимо убедиться, что все библиотеки корректно упакованы:
+   ```bash
+   mkdir -p AppDir/usr/lib
+   cp -a $HOME/libtorch/lib/* AppDir/usr/lib/
+   ```
+
+   При создании AppImage добавьте:
+   ```bash
+   --extra-libs=$HOME/libtorch/lib/
+   ```
+
+### Распространение вашего AppImage
+
+1. **Проверьте AppImage на разных дистрибутивах**
+
+   Протестируйте AppImage на разных версиях Linux, чтобы убедиться в его работоспособности.
+
+2. **Добавьте информацию в GitHub Release**
+
+   При создании релиза на GitHub загрузите AppImage файл и укажите информацию о требованиях:
+   ```
+   GTKSolver-x86_64.AppImage - Standalone application bundle for Linux x86_64
+   - No installation required
+   - Contains all dependencies
+   - Minimum system requirements: Linux kernel 3.2 or newer
+   ```
+
+3. **Обновление AppImage**
+
+   Для обновления просто замените старый файл AppImage на новый.
+
 ## ⚙️ Архитектура системы
 
 ### 🧠 Нейросетевое ядро
@@ -345,7 +567,14 @@ GTKSolver/
 │       ├── training_manager.vala
 │       ├── trainer_window.ui
 │       └── resources.xml    # Определение GResources для Trainer
-│
+├── desktop/                 # Desktop файлы для интеграции в систему
+│   ├── gtksolver-gui.desktop
+│   └── gtksolver-trainer.desktop
+├── icons/                   # Иконки приложения
+│   ├── gtksolver.svg
+│   └── gtksolver-trainer.svg
+├── metainfo/                # Метаданные AppStream
+│   └── gtksolver.appdata.xml
 └── README.md                # Этот файл
 ```
 
@@ -410,4 +639,3 @@ MIT
 ## ✍️ Авторы
 
 Danayer, 2025
-
