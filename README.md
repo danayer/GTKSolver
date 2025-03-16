@@ -9,7 +9,7 @@
   <a href="#-установка"><strong>Установка</strong></a> •
   <a href="#-использование"><strong>Использование</strong></a> •
   <a href="#-обучение-модели"><strong>Обучение</strong></a> •
-  <a href="#-архитектура"><strong>Архитектура</strong></a> •
+  <a href="#-Архитектура-системы"><strong>Архитектура</strong></a> •
   <a href="#-сборка-и-использование-appimage"><strong>AppImage</strong></a>
 </div>
 
