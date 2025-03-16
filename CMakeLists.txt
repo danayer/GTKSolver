@@ -33,11 +33,11 @@ add_library(formula_core STATIC ${CORE_SOURCES} ${CORE_HEADERS})
 target_link_libraries(formula_core ${TORCH_LIBRARIES})
 target_include_directories(formula_core PRIVATE ${TORCH_INCLUDE_DIRS})
 
-# Исполняемый файл для обучения
+# Исполняемый файл для обучения через командную строку
 add_executable(train src/core/train_main.cpp)
 target_link_libraries(train formula_core ${TORCH_LIBRARIES})
 
-# Настраиваем компиляцию Vala кода
+# Настраиваем компиляцию Vala кода для основного GUI
 include(${CMAKE_SOURCE_DIR}/cmake/ValaPrecompile.cmake)
 
 vala_precompile(GUI_VALA_C
@@ -51,12 +51,31 @@ OPTIONS
     --target-glib=2.50
 )
 
-# Создаем исполняемый файл для GUI
+# Настраиваем компиляцию Vala кода для GUI обучения
+vala_precompile(TRAINER_VALA_C
+    src/trainer/main_trainer.vala
+    src/trainer/trainer_window.vala
+    src/trainer/training_manager.vala
+PACKAGES
+    gtk4
+OPTIONS
+    --target-glib=2.50
+)
+
+# Создаем исполняемый файл для основного GUI
 add_executable(formula-teacher-gui ${GUI_VALA_C})
 target_link_libraries(formula-teacher-gui formula_core PkgConfig::GTK4)
 
+# Создаем исполняемый файл для GUI обучения
+add_executable(formula-teacher-trainer ${TRAINER_VALA_C})
+target_link_libraries(formula-teacher-trainer formula_core PkgConfig::GTK4)
+
 # Установка
-install(TARGETS formula-teacher-gui train DESTINATION bin)
+install(TARGETS formula-teacher-gui formula-teacher-trainer train DESTINATION bin)
+
+# Копирование UI файлов
+configure_file(src/gui/window.ui ${CMAKE_BINARY_DIR}/window.ui COPYONLY)
+configure_file(src/trainer/trainer_window.ui ${CMAKE_BINARY_DIR}/trainer_window.ui COPYONLY)
 
 # Предупреждения для C++
 if(MSVC)

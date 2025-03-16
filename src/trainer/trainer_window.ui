@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="TrainerWindow" parent="GtkApplicationWindow">
+    <property name="default-width">800</property>
+    <property name="default-height">700</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkHeaderBar" id="header_bar">
+            <child type="end">
+              <object class="GtkSpinner" id="training_spinner">
+                <property name="visible">true</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="margin-start">12</property>
+            <property name="margin-end">12</property>
+            <property name="margin-top">12</property>
+            <property name="margin-bottom">12</property>
+            <property name="spacing">12</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Настройка обучения модели</property>
+                <property name="halign">start</property>
+                <property name="margin-bottom">12</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="scale" value="1.2"/>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkGrid">
+                <property name="row-spacing">8</property>
+                <property name="column-spacing">12</property>
+                <property name="halign">fill</property>
+                <property name="hexpand">true</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Корпус текстов:</property>
+                    <property name="halign">end</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="spacing">6</property>
+                    <property name="hexpand">true</property>
+                    <child>
+                      <object class="GtkEntry" id="corpus_path_entry">
+                        <property name="hexpand">true</property>
+                        <property name="placeholder-text">Путь к файлу корпуса</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="load_corpus_button">
+                        <property name="label">Выбрать</property>
+                      </object>
+                    </child>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Выходной файл:</property>
+                    <property name="halign">end</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="spacing">6</property>
+                    <property name="hexpand">true</property>
+                    <child>
+                      <object class="GtkEntry" id="output_path_entry">
+                        <property name="hexpand">true</property>
+                        <property name="placeholder-text">Путь для сохранения модели</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="select_output_button">
+                        <property name="label">Выбрать</property>
+                      </object>
+                    </child>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Количество эпох:</property>
+                    <property name="halign">end</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">2</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="epochs_spin">
+                    <property name="adjustment">
+                      <object class="GtkAdjustment">
+                        <property name="lower">1</property>
+                        <property name="upper">1000</property>
+                        <property name="value">50</property>
+                        <property name="step-increment">1</property>
+                        <property name="page-increment">10</property>
+                      </object>
+                    </property>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">2</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Размер батча:</property>
+                    <property name="halign">end</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">3</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="batch_size_spin">
+                    <property name="adjustment">
+                      <object class="GtkAdjustment">
+                        <property name="lower">1</property>
+                        <property name="upper">256</property>
+                        <property name="value">32</property>
+                        <property name="step-increment">1</property>
+                        <property name="page-increment">8</property>
+                      </object>
+                    </property>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">3</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Скорость обучения:</property>
+                    <property name="halign">end</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">4</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="learning_rate_spin">
+                    <property name="adjustment">
+                      <object class="GtkAdjustment">
+                        <property name="lower">0.0001</property>
+                        <property name="upper">0.1</property>
+                        <property name="value">0.001</property>
+                        <property name="step-increment">0.0001</property>
+                        <property name="page-increment">0.001</property>
+                      </object>
+                    </property>
+                    <property name="digits">4</property>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">4</property>
+                    </layout>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="spacing">12</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
+                <child>
+                  <object class="GtkButton" id="start_training_button">
+                    <property name="label">Начать обучение</property>
+                    <property name="hexpand">true</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="stop_training_button">
+                    <property name="label">Остановить</property>
+                    <property name="hexpand">true</property>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Прогресс обучения:</property>
+                <property name="halign">start</property>
+                <property name="margin-top">6</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkProgressBar" id="training_progress">
+                <property name="show-text">true</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="status_label">
+                <property name="label">Готов к обучению</property>
+                <property name="halign">center</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">12</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Журнал обучения:</property>
+                <property name="halign">start</property>
+                <property name="margin-bottom">6</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="vexpand">true</property>
+                <property name="min-content-height">200</property>
+                <child>
+                  <object class="GtkTextView" id="log_text_view">
+                    <property name="editable">false</property>
+                    <property name="monospace">true</property>
+                    <property name="wrap-mode">word</property>
+                    <property name="margin-bottom">12</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
