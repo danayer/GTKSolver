@@ -100,7 +100,7 @@ source ~/.bashrc
 </details>
 
 <details>
-<summary><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Astra_Linux_logo.svg" height="20"> <b>Astra Linux</b></summary>
+<summary><img src="https://upload.wikimedia.org/wikipedia/ru/8/86/Astra_Linux.png" height="20"> <b>Astra Linux</b></summary>
 
 ```bash
 # Установка базовых инструментов
@@ -129,7 +129,7 @@ source ~/.bashrc
 </details>
 
 <details>
-<summary><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Archlinux-icon-crystal-64.svg" height="20"> <b>Arch Linux</b></summary>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Arch_Linux_"Crystal"_icon.svg" height="20"> <b>Arch Linux</b></summary>
 
 ```bash
 # Установка базовых инструментов
