@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GTKSolverWindow" parent="GtkApplicationWindow">
+    <property name="default-width">800</property>
+    <property name="default-height">600</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkHeaderBar" id="header_bar">
+            <child type="end">
+              <object class="GtkSpinner" id="loading_spinner">
+                <property name="visible">true</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="margin-start">12</property>
+            <property name="margin-end">12</property>
+            <property name="margin-top">12</property>
+            <property name="margin-bottom">12</property>
+            <property name="spacing">12</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Задача:</property>
+                <property name="halign">start</property>
+                <property name="margin-bottom">6</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="vexpand">true</property>
+                <child>
+                  <object class="GtkTextView" id="task_text_view">
+                    <property name="wrap-mode">word</property>
+                    <property name="monospace">false</property>
+                    <property name="accepts-tab">true</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="homogeneous">true</property>
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkButton" id="load_task_button">
+                    <property name="label">Загрузить задачу</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="load_model_button">
+                    <property name="label">Загрузить модель</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="solve_button">
+                    <property name="label">Решить</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Решение:</property>
+                <property name="halign">start</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-top">12</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="vexpand">true</property>
+                <child>
+                  <object class="GtkTextView" id="solution_text_view">
+                    <property name="wrap-mode">word</property>
+                    <property name="editable">false</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="halign">end</property>
+                <child>
+                  <object class="GtkButton" id="save_solution_button">
+                    <property name="label">Сохранить решение</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
