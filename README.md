@@ -71,7 +71,7 @@ source ~/.bashrc
 </details>
 
 <details>
-<summary><img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Altlinux.svg" height="20"> <b>Alt Linux</b></summary>
+<summary><img src="https://www.altlinux.org/Images.www.altlinux.org/3/30/Alt_linux_team_small.png" height="20"> <b>Alt Linux</b></summary>
 
 ```bash
 # Установка базовых инструментов
