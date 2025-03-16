@@ -82,119 +82,105 @@ public class GTKSolverWindow : ApplicationWindow {
     }
     
     private void on_load_task_clicked() {
-        var file_chooser = new FileChooserDialog(
-            "Загрузить задачу", this, FileChooserAction.OPEN,
-            "_Отмена", ResponseType.CANCEL,
-            "_Открыть", ResponseType.ACCEPT
-        );
+        var file_dialog = new FileDialog();
+        file_dialog.set_title("Загрузить задачу");
         
         var filter = new FileFilter();
         filter.add_mime_type("text/plain");
-        filter.set_name("Текстовые файлы");
-        file_chooser.add_filter(filter);
+        // Use add_pattern instead of set_pattern
+        filter.add_pattern("*.txt");
         
-        file_chooser.response.connect((dialog, response) => {
-            if (response == ResponseType.ACCEPT) {
-                try {
+        // Use explicit property assignment for name
+        filter.name = "Текстовые файлы";
+        
+        // Use fully qualified name for ListStore
+        var filters = new GLib.ListStore(typeof(FileFilter));
+        filters.append(filter);
+        file_dialog.set_filters(filters);
+        
+        file_dialog.open.begin(this, null, (obj, res) => {
+            try {
+                var file = file_dialog.open.end(res);
+                if (file != null) {
                     string content;
-                    File file = File.new_for_path(file_chooser.get_file().get_path());
                     FileUtils.get_contents(file.get_path(), out content);
                     task_text_view.buffer.text = content;
                     solve_button.sensitive = true;
-                } catch (Error e) {
-                    show_error_dialog("Ошибка загрузки", e.message);
                 }
+            } catch (Error e) {
+                show_error_dialog("Ошибка загрузки", e.message);
             }
-            file_chooser.destroy();
         });
-        
-        file_chooser.present();
     }
     
     private void on_load_model_clicked() {
-        var file_chooser = new FileChooserDialog(
-            "Загрузить модель", this, FileChooserAction.OPEN,
-            "_Отмена", ResponseType.CANCEL,
-            "_Открыть", ResponseType.ACCEPT
-        );
+        var file_dialog = new FileDialog();
+        file_dialog.set_title("Загрузить модель");
         
         var filter = new FileFilter();
+        // Use add_pattern instead of set_pattern
         filter.add_pattern("*.pt");
-        filter.set_name("Файлы модели PyTorch (*.pt)");
-        file_chooser.add_filter(filter);
+        filter.name = "Файлы модели PyTorch (*.pt)";
         
-        file_chooser.response.connect((dialog, response) => {
-            if (response == ResponseType.ACCEPT) {
-                loading_spinner.start();
-                model_manager.load_model.begin(file_chooser.get_file().get_path(), (obj, res) => {
-                    try {
-                        model_manager.load_model.end(res);
-                        solve_button.sensitive = true;
-                        show_info_dialog("Модель загружена", "Модель успешно загружена");
-                    } catch (Error e) {
-                        show_error_dialog("Ошибка загрузки модели", e.message);
-                    }
-                    loading_spinner.stop();
-                });
+        // Use fully qualified name for ListStore
+        var filters = new GLib.ListStore(typeof(FileFilter));
+        filters.append(filter);
+        file_dialog.set_filters(filters);
+        
+        file_dialog.open.begin(this, null, (obj, res) => {
+            try {
+                var file = file_dialog.open.end(res);
+                if (file != null) {
+                    loading_spinner.start();
+                    model_manager.load_model.begin(file.get_path(), (obj, res) => {
+                        try {
+                            model_manager.load_model.end(res);
+                            solve_button.sensitive = true;
+                            show_info_dialog("Модель загружена", "Модель успешно загружена");
+                        } catch (Error e) {
+                            show_error_dialog("Ошибка загрузки модели", e.message);
+                        }
+                        loading_spinner.stop();
+                    });
+                }
+            } catch (Error e) {
+                show_error_dialog("Ошибка выбора файла", e.message);
             }
-            file_chooser.destroy();
         });
-        
-        file_chooser.present();
     }
     
     private void on_save_solution_clicked() {
-        var file_chooser = new FileChooserDialog(
-            "Сохранить решение", this, FileChooserAction.SAVE,
-            "_Отмена", ResponseType.CANCEL,
-            "_Сохранить", ResponseType.ACCEPT
-        );
+        var file_dialog = new FileDialog();
+        file_dialog.set_title("Сохранить решение");
+        file_dialog.set_initial_name("решение.txt");
         
-        file_chooser.set_current_name("решение.txt");
-        
-        file_chooser.response.connect((dialog, response) => {
-            if (response == ResponseType.ACCEPT) {
-                try {
+        file_dialog.save.begin(this, null, (obj, res) => {
+            try {
+                var file = file_dialog.save.end(res);
+                if (file != null) {
                     string content = solution_text_view.buffer.text;
-                    FileUtils.set_contents(file_chooser.get_file().get_path(), content);
+                    FileUtils.set_contents(file.get_path(), content);
                     show_info_dialog("Сохранено", "Решение успешно сохранено");
-                } catch (Error e) {
-                    show_error_dialog("Ошибка сохранения", e.message);
                 }
+            } catch (Error e) {
+                show_error_dialog("Ошибка сохранения", e.message);
             }
-            file_chooser.destroy();
         });
-        
-        file_chooser.present();
     }
     
     private void show_error_dialog(string title, string message) {
-        var dialog = new MessageDialog(
-            this,
-            DialogFlags.MODAL,
-            MessageType.ERROR,
-            ButtonsType.OK,
-            "%s", message
-        );
-        dialog.set_title(title);
-        dialog.response.connect((dialog, response) => {
-            dialog.destroy();
-        });
-        dialog.present();
+        // Create AlertDialog with required parameters
+        var dialog = new AlertDialog(title, message);
+        dialog.set_buttons({"OK"});
+        dialog.set_modal(true);
+        dialog.show(this);
     }
     
     private void show_info_dialog(string title, string message) {
-        var dialog = new MessageDialog(
-            this,
-            DialogFlags.MODAL,
-            MessageType.INFO,
-            ButtonsType.OK,
-            "%s", message
-        );
-        dialog.set_title(title);
-        dialog.response.connect((dialog, response) => {
-            dialog.destroy();
-        });
-        dialog.present();
+        // Create AlertDialog with required parameters
+        var dialog = new AlertDialog(title, message);
+        dialog.set_buttons({"OK"});
+        dialog.set_modal(true);
+        dialog.show(this);
     }
 }
