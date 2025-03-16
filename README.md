@@ -158,7 +158,7 @@ source ~/.bashrc
 </details>
 
 <details>
-<summary><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/The_GIMP_icon_-_gnome.svg" height="20"> <b>Fedora/Red Hat/CentOS</b></summary>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg" height="20"> <b>Fedora/Red Hat/CentOS</b></summary>
 
 ```bash
 # Установка базовых инструментов
