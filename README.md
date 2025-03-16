@@ -129,7 +129,7 @@ source ~/.bashrc
 </details>
 
 <details>
-<summary><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Arch_Linux_"Crystal"_icon.svg" height="20"> <b>Arch Linux</b></summary>
+<summary><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Archlinux-logo-standard-version.svg" height="20"> <b>Arch Linux</b></summary>
 
 ```bash
 # Установка базовых инструментов
