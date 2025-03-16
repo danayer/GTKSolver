@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>gtksolver-gui.desktop</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>GTKSolver</name>
+  <summary>Neural network for solving formula problems</summary>
+  <description>
+    <p>
+      GTKSolver is an intelligent system that uses neural networks to learn from textbook
+      data containing mathematical formulas and subsequently solve problems on this topic.
+    </p>
+  </description>
+  <url type="homepage">https://github.com/danayer/GTKSolver</url>
+  <provides>
+    <binary>gtksolver-gui</binary>
+    <binary>gtksolver-trainer</binary>
+  </provides>
+  <releases>
+    <release version="0.1.0" date="2025-01-01">
+      <description>
+        <p>Initial release of GTKSolver</p>
+      </description>
+    </release>
+  </releases>
+</component>

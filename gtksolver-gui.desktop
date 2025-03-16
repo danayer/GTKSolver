@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=GTKSolver
+Comment=Neural network for solving formula problems
+Exec=gtksolver-gui
+Icon=gtksolver
+Terminal=false
+Type=Application
+Categories=Education;Science;Math;

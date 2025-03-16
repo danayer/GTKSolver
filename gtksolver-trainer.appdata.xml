@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.gtksolver.trainer</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>GTKSolver Trainer</name>
+  <summary>Train neural networks for formula solving</summary>
+  <description>
+    <p>
+      GTKSolver Trainer allows you to train neural network models using textbook
+      data containing mathematical formulas, which can then be used by GTKSolver
+      to solve problems.
+    </p>
+  </description>
+  <launchable type="desktop-id">gtksolver-trainer.desktop</launchable>
+  <url type="homepage">https://github.com/danayer/GTKSolver</url>
+  <developer_name>Danayer</developer_name>
+  <provides>
+    <binary>gtksolver-trainer</binary>
+  </provides>
+  <releases>
+    <release version="0.1.0" date="2025-01-01">
+      <description>
+        <p>Initial release of GTKSolver Trainer</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>

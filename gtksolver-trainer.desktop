@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=GTKSolver Trainer
+Comment=Train neural network on text data
+Exec=gtksolver-trainer
+Icon=gtksolver-trainer
+Terminal=false
+Categories=Education;
+X-AppStream-Ignore=false
